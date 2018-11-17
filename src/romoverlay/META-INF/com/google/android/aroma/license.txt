@@ -1,0 +1,22 @@
+<@center><b><#selectbg_g>URWsoft BareBone Cleaner Project TERMS</#></b>
+
+<@center><b>! Flash this Script at your own Risk !</b>
+<@center><b>!! - I don't take any responsibility for any Damage - !!</b>
+<@center><b>Create a Nandroid-Backup before flashing the script!</b>
+
+
+<@center><b><#selectbg_g>Which Device and ROM is currently supported</#>
+
+<@center>This Script was created for and tested on the Galaxy S5 - G900F and is designed for LP 5.0.x TouchWiz ROMs (Odex/Deodex is working).
+
+<@center><#selectbg_g>What happens if you use my script?</#></b>
+<@center>This script deletes all kind of apps, files and services down to a BareBone level depending on what you will select to be cleaned. From that level you can add any desired app from the Google Playstore to satisfy your personal style.
+
+<@center>NO User installed apps will be touched at all! Cleaning is ROM based only!
+<@center>Cleaning is ROM based only!
+
+<@center><b><#selectbg_g>Be Cautious!</#></b>
+<@center>Be cautious in what you are selecting. If you choose to wipe the Samsung Keyboard for example, you should make sure that you have an alternative keyboard in place, otherwise you are not able anymore to type anything.
+
+<@center>Therefore, to be on the save side, if you don't have a Nandroid Backup made yet, quit the Cleaner and create a Nandroid first.
+

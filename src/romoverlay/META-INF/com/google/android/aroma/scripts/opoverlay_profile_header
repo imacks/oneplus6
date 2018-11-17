@@ -1,0 +1,26 @@
+# --> PLEASE AVOID TO MAKE ANY CHANGES IN THIS PROP FILE <---
+
+#############################################################################
+#            
+# OverlayROM.op3.profile
+#
+# Configuration file to allow customize the installation
+# 
+# Magisk overlay ROM designed for OnePlus3/3T devices
+# Authored by iMacks
+#
+#############################################################################
+#
+# This file is used to save all individual selections done
+# by the user since the last execution of the Aroma Installer.
+#     
+# If you delete this file or folder from your sdcard, these settings will 
+# be used the next time you run the Aroma Installer.
+#
+#############################################################################
+#
+# The following section will give you some system information
+# based on your last cleaning session.
+#
+prop.type=op3
+#

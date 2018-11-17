@@ -1,0 +1,1244 @@
+# OverlayROM Update-Script
+
+ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" ");
+ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" ");
+ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" ");
+
+#assert(getprop("ro.product.name") == "OnePlus6" || getprop("ro.omni.device") == "enchilada" || abort("This package is for device: OnePlus6; this device is " + getprop("ro.product.device") + "."););
+
+ui_print(" "); 
+ui_print("+==============================================+");
+ui_print("|      Magisk Overlay ROM for OP6 Devices      |");
+ui_print("|                >>> MARK I <<<                |");
+ui_print("+==============================================+");
+ui_print(" ");
+
+ui_print("[!] This operation may take several minutes. Do not power off your device!");
+ui_print(" ");
+
+ui_print("[i] Prepare work folder...");
+#show_progress(0.10000,127);
+package_extract_dir("META-INF/com/google/android/aroma/tmp", "/tmp");
+set_metadata_recursive("/tmp", "uid", 0, "gid", 0, "dmode", 0777, "fmode", 0777);
+run_program("/tmp/7za", "x", "-y", "/tmp/opoverlay", "*", "-o/tmp/");
+set_metadata_recursive("/tmp", "uid", 0, "gid", 0, "dmode", 0777, "fmode", 0777);
+run_program("/tmp/tools/busybox", "rm", "-f", "/tmp/opoverlay");
+
+run_program("/tmp/tools/shjob.sh", "prop");
+	ui_print(" "); 
+	if file_getprop("/tmp/opoverlay.prop.location","location") == "0" then 
+		ui_print("  - using profile from rom.zip");
+	endif;
+	if file_getprop("/tmp/opoverlay.prop.location","location") == "1" then 
+		ui_print("  - using profile from /sdcard");
+	endif;
+	if file_getprop("/tmp/opoverlay.prop.location","location") == "2" then 
+		ui_print("  - using profile from /sdcard/opoverlay");
+	endif;
+	if file_getprop("/tmp/opoverlay.prop.location","location") == "3" then 
+		ui_print("  - using profile from OTG media");
+	endif;
+ui_print(" "); 
+sleep(2);
+
+run_program("/tmp/tools/shjob.sh", "mount", "u", "/system");
+run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+run_program("/tmp/tools/shjob.sh", "mount", "m", "/vendor");
+run_program("/tmp/tools/shjob.sh", "mount", "m", "/data");
+run_program("/tmp/tools/shjob.sh", "mkdir", "/tmp/firmware/");
+run_program("/tmp/tools/shjob.sh", "rm", "d", "/data/opoverlay");
+run_program("/tmp/tools/shjob.sh", "rm", "d", "/data/media/opoverlay");
+run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/Data/opoverlay", "/data/opoverlay/");
+run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/misc/core/system", "/tmp/system/etc/opoverlay/");
+run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/misc/Tweaks/system", "/tmp/system/etc/opoverlay/");
+run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/misc/xbin/system", "/tmp/system/");
+run_program("/tmp/tools/shjob.sh", "extsdrw");
+
+ui_print("[i] Cleaning up SU and BusyBox leftovers..."); 
+run_program("/tmp/tools/shjob.sh", "mount", "m", "/data");
+#ui_print("  - BusyBox");
+run_program("/tmp/tools/shjob.sh", "cleaning", "b", "/data");
+#ui_print("  - Magisk");
+run_program("/tmp/tools/shjob.sh", "cleaning", "m", "/data");
+#ui_print("  - SuperSU");
+run_program("/tmp/tools/shjob.sh", "cleaning", "s", "/data");
+#ui_print("  - System");
+run_program("/tmp/tools/shjob.sh", "mount", "m", "/system"); 
+run_program("/tmp/tools/shjob.sh", "mount", "m", "/data");
+run_program("/tmp/tools/shjob.sh", "cp", "d", "/system/system/app/LiveWallpapersPicker", "/tmp/apps/WallpaperPickerGoogle/system/app/LiveWallpapersPicker/");
+
+if file_getprop("/tmp/opoverlay.profile","Allbuild.propTweaks") == "1" then 
+	ui_print("[i] Installing ALL build.prop tweaks...");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+
+	ui_print("  - Root support for Tasker");
+	run_program("/tmp/tools/shjob.sh", "build.prop", "tasker");
+
+	#ui_print("  - 2.4GHz WiFi channel bonding");
+	#run_program("/tmp/tools/shjob.sh", "wifi", "CB");
+
+	ui_print("  - Better voice call quality");
+	run_program("/tmp/tools/btweaks.sh", "11.prop");
+
+	ui_print("  - Boost net speed");
+	run_program("/tmp/tools/btweaks.sh", "15.prop");
+
+	ui_print("  - 3G signal and speed");
+	run_program("/tmp/tools/btweaks.sh", "17.prop");
+	
+	#ui_print("  - Fast DNS");
+	#run_program("/tmp/tools/btweaks.sh", "16a.prop");
+
+	ui_print("  - More RAM");
+	run_program("/tmp/tools/btweaks.sh", "22.prop");
+
+	ui_print("  - Memory tweaks");
+	run_program("/tmp/tools/btweaks.sh", "24.prop");
+
+	ui_print("  - Enhance memory management");
+	run_program("/tmp/tools/btweaks.sh", "25.prop");
+
+	ui_print("  - Enhance general performances");
+	run_program("/tmp/tools/btweaks.sh", "5.prop");
+
+	ui_print("  - Smoother scrolling");
+	run_program("/tmp/tools/btweaks.sh", "21.prop");
+
+	ui_print("  - Smoother video streaming");
+	run_program("/tmp/tools/btweaks.sh", "14.prop");
+
+	ui_print("  - Improves audio and video record quality");
+	run_program("/tmp/tools/btweaks.sh", "13.prop");
+
+	ui_print("  - AGPS mods");
+	run_program("/tmp/tools/btweaks.sh", "19.prop");
+
+	ui_print("  - Faster boot time");
+	run_program("/tmp/tools/btweaks.sh", "1.prop");
+
+	ui_print("  - Disable logs and error reporting");
+	run_program("/tmp/tools/btweaks.sh", "8.prop");
+
+	ui_print("  - Enable Magisk Hide");
+	run_program("/tmp/tools/btweaks.sh", "6.prop");
+
+	ui_print("  - Phone rings immediately");
+	run_program("/tmp/tools/btweaks.sh", "9.prop");
+
+	ui_print("  - More volume steps in call");
+	run_program("/tmp/tools/btweaks.sh", "10.prop");
+
+	ui_print("  - Decrease screen off-on time during call");
+	run_program("/tmp/tools/btweaks.sh", "12.prop");
+
+	ui_print("  - Enables 270 degree rotation");
+	run_program("/tmp/tools/btweaks.sh", "3.prop");
+
+	ui_print("  - No wakeup by hitting volume rocker");
+	run_program("/tmp/tools/btweaks.sh", "2.prop");
+
+	ui_print("  - More intense flashlight");
+	run_program("/tmp/tools/btweaks.sh", "7.prop");
+
+	ui_print("  - Disable persistant USB notifications");
+	run_program("/tmp/tools/btweaks.sh", "23.prop");
+
+	ui_print("  - MMS APN retry timer set to 2 seconds");
+	run_program("/tmp/tools/btweaks.sh", "20.prop");
+
+	ui_print("  - Misc system tweaks");
+	run_program("/tmp/tools/btweaks.sh", "26.prop");
+
+	ui_print("  - Kernel tweaks");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/misc/Kernel/system", "/tmp/system/etc/opoverlay/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","IndividualTweaksSelections") == "1" then
+	ui_print("[i] Installing SELECTED build.prop tweaks...");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+
+	if file_getprop("/tmp/opoverlay.profile","RootsupportforTasker") == "1" then 
+		ui_print("  - Root support for Tasker");
+		run_program("/tmp/tools/shjob.sh", "build.prop", "tasker");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","2.4GHzWiFichannelbonding") == "1" then 
+		ui_print("  - 2.4GHz WiFi channel bonding");
+		run_program("/tmp/tools/shjob.sh", "wifi", "CB");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Bettercallvoicequality") == "1" then 
+		ui_print("  - Better call voice quality");
+		run_program("/tmp/tools/btweaks.sh", "11.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Betternetspeeds") == "1" then 
+		ui_print("  - Better voice call quality");
+		run_program("/tmp/tools/btweaks.sh", "15.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","3Gsignalandspeedtweaks") == "1" then 
+		ui_print("  - 3G signal and speed tweaks");
+		run_program("/tmp/tools/btweaks.sh", "17.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","MoreRAM") == "1" then 
+		ui_print("  - More RAM");
+		run_program("/tmp/tools/btweaks.sh", "22.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","MemoryTweaks") == "1" then 
+		ui_print("  - Memory tweaks");
+		run_program("/tmp/tools/btweaks.sh", "24.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Bettermemorymanagement") == "1" then 
+		ui_print("  - Enhance memory management");
+		run_program("/tmp/tools/btweaks.sh", "25.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","IncreasegeneralPerformances") == "1" then 
+		ui_print("  - Enhance general performances");
+		run_program("/tmp/tools/btweaks.sh", "5.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Smootherscrolling") == "1" then 
+		ui_print("  - Smoother scrolling");
+		run_program("/tmp/tools/btweaks.sh", "21.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Smoothervideostreaming") == "1" then 
+		ui_print("  - Smoother video streaming");
+		run_program("/tmp/tools/btweaks.sh", "14.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Improvesaudio") == "1" then 
+		ui_print("  - Improves audio and video record quality");
+		run_program("/tmp/tools/btweaks.sh", "13.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","AGPSmods") == "1" then 
+		ui_print("  - AGPS mods");
+		run_program("/tmp/tools/btweaks.sh", "19.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Fasterboot") == "1" then 
+		ui_print("  - Faster boot time");
+		run_program("/tmp/tools/btweaks.sh", "1.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Disablelogs") == "1" then 
+		ui_print("  - Disable logs and error reporting");
+		run_program("/tmp/tools/btweaks.sh", "8.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","MagiskHidesupport") == "1" then 
+		ui_print("  - Enable Magisk Hide");
+		run_program("/tmp/tools/btweaks.sh", "6.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Phoneringsimmediately") == "1" then 
+		ui_print("  - Phone rings immediately");
+		run_program("/tmp/tools/btweaks.sh", "9.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Morevolumestepsincall") == "1" then 
+		ui_print("  - More volume steps in call");
+		run_program("/tmp/tools/btweaks.sh", "10.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Decreasescreenoff") == "1" then 
+		ui_print("  - Decrease screen off-on time during call");
+		run_program("/tmp/tools/btweaks.sh", "12.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Enables270DegreeRotation") == "1" then 
+		ui_print("  - Enables 270 degree rotation");
+		run_program("/tmp/tools/btweaks.sh", "3.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Nowakeupbyhittingvolumerocker") == "1" then 
+		ui_print("  - No wakeup by hitting volume rocker");
+		run_program("/tmp/tools/btweaks.sh", "2.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","BetterFlashlightintensity") == "1" then 
+		ui_print("  - More intense flashlight");
+		run_program("/tmp/tools/btweaks.sh", "7.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","DisablepersistantUSB") == "1" then 
+		ui_print("  - Disable persistant USB notifications");
+		run_program("/tmp/tools/btweaks.sh", "23.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","MMSAPNretrytimersetto2sec") == "1" then 
+		ui_print("  - MMS APN retry timer set to 2 seconds");
+		run_program("/tmp/tools/btweaks.sh", "20.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","MiscSystemTweaks") == "1" then 
+		ui_print("  - Misc system tweaks");
+		run_program("/tmp/tools/btweaks.sh", "26.prop");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","KernelTweaks") == "1" then 
+		ui_print("  - Kernel tweaks");
+		run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/misc/Kernel/system", "/tmp/system/etc/opoverlay/");
+	endif;
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","DisableGooglePlayWakelocks") == "1" then 
+	ui_print("[i] Disable Google Play wakelocks");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/data");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/misc/Wakelocks/system", "/tmp/system/etc/opoverlay/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","DisableGooglePlayWakelocks") != "1" then
+	ui_print("[i] Restore Google Play wakelocks");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/data");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/misc/Wakelocks/enable/system", "/tmp/system/etc/opoverlay/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","SkipAndroidSetupWizard") == "1" then 
+	ui_print("[i] Skip Android setup wizard");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/btweaks.sh", "27.prop");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","ExtremeDebloating") == "1" then 
+	ui_print("[i] Debloat ROM in with extreme prejudice");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+
+	ui_print("  - AndroidPay");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/AndroidPay");
+
+	ui_print("  - Chrome");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Chrome", "com.android.chrome");
+
+	ui_print("  - Drive");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Drive", "com.google.android.apps.docs");
+
+	if file_getprop("/tmp/opoverlay.profile","GoogleGmailforExchange") == "0" then 
+		ui_print("  - Gmail2");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Gmail2", "com.google.android.gm");
+	endif; 
+	if file_getprop("/tmp/opoverlay.profile","GoogleGmailforExchange") != "0" then 
+		ui_print("  - Skipped Gmail2 due to Exchange dependency");
+	endif;	
+
+	ui_print("  - Hangouts");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Hangouts");
+
+	ui_print("  - GooglePay");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/GooglePay", "com.google.android.apps.walletnfcrel");
+
+	ui_print("  - LiveWallpapersPicker");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/LiveWallpapersPicker");
+
+	ui_print("  - Maps");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Maps", "com.google.android.apps.maps");
+
+	ui_print("  - Music2");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Music2", "com.google.android.music");
+
+	ui_print("  - OPBackupRestore");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPBackupRestore");
+
+	ui_print("  - OPFilemanager");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPFilemanager", "com.oneplus.filemanager");
+
+	ui_print("  - OPForum");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPForum", "net.oneplus.forums");
+
+	ui_print("  - OPMusic");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPMusic");
+
+	ui_print("  - OPPush");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPPush"); 
+
+	ui_print("  - H2DefaultIconPack, H2FolioIconPack, H2LightIconPack, OneplusIconPack, OneplusSquareIconPack, OPIconpack");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/H2DefaultIconPack"); 
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/H2FolioIconPack"); 
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/H2LightIconPack"); 
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OneplusIconPack"); 
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OneplusSquareIconPack");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OPIconpack");
+
+	ui_print("  - Photos");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Photos", "com.google.android.apps.photos");
+
+	ui_print("  - SoundRecorder");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/SoundRecorder", "com.oneplus.soundrecorder");
+
+	ui_print("  - SwiftKey");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/SwiftKey");
+
+	ui_print("  - talkback");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/talkback");
+
+	ui_print("  - Videos");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Videos", "com.google.android.videos");
+
+	ui_print("  - Weather");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/Weather", "net.oneplus.weather");
+
+	ui_print("  - YouTube");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/YouTube", "com.google.android.youtube");
+
+	ui_print("  - BasicDreams");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/BasicDreams");
+
+	ui_print("  - BookmarkProvider");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/BookmarkProvider");
+
+	ui_print("  - BTtestmode");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/BTtestmode");
+
+	ui_print("  - bugreportz");
+	run_program("/tmp/tools/shjob.sh", "debloat", "f", "/bin/bugreportz");
+
+	ui_print("  - DMAgent");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/DMAgent");
+
+	ui_print("  - Duo");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Duo", "com.google.android.apps.tachyon");
+
+	ui_print("  - EasterEgg");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/EasterEgg");
+
+	ui_print("  - EngineeringMode");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/EngineeringMode");
+
+	ui_print("  - EngSpecialTest");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/EngSpecialTest");
+
+	ui_print("  - fmfactorytestserver");
+	run_program("/tmp/tools/shjob.sh", "debloat", "f", "/bin/fmfactorytestserver");
+
+	ui_print("  - LogKitSdService");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/LogKitSdService");
+
+	ui_print("  - NFCTestMode");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/NFCTestMode");
+
+	ui_print("  - OemAutoTestServer");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OemAutoTestServer");
+
+	ui_print("  - OEMLogKit");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OEMLogKit");
+	run_program("/tmp/tools/shjob.sh", "debloat", "f", "/bin/oemlogkit");
+
+	ui_print("  - OPBugReportLite");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPBugReportLite");
+
+	ui_print("  - OPDeviceManager, OPDeviceManagerProvider");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OPDeviceManager");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OPDeviceManagerProvider");
+
+	ui_print("  - OpenWnn");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OpenWnn");
+
+	ui_print("  - PartnerBootmarksProvider");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/PartnerBookmarksProvider");
+
+	ui_print("  - SecureSampleAuthService");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/SecureSampleAuthService");
+
+	ui_print("  - SensorTestTool");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/SensorTestTool");
+
+	ui_print("  - Stk");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Stk");
+
+	ui_print("  - USB drivers ISO");
+	run_program("/tmp/tools/shjob.sh", "debloat", "f", "/etc/usb_drivers.iso");
+
+	ui_print("  - WifiLogger_app");
+	run_program("/tmp/tools/shjob.sh", "debloat", "f", "/bin/WifiLogger_app");
+
+	ui_print("  - WifiRfTestApk");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/WifiRfTestApk");
+
+	ui_print("  - tts, PicoTts, GoogleTTS");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/tts");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/PicoTts");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/GoogleTTS", "com.google.android.tts");
+
+	ui_print("  - VrCore");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/VrCore");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","OnePlusAnalyticsDisablerLight") == "1" then 
+	ui_print("[i] Disable light analytics");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OPDeviceManager", "net.oneplus.odm");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OPDeviceManagerProvider");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","OnePlusAnalyticsDisablerFull") == "1" then 
+	ui_print("[i] Disable full analytics");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OPDeviceManager", "net.oneplus.odm");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OPDeviceManagerProvider");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/EngineeringMode");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OEMLogKit");
+	run_program("/tmp/tools/shjob.sh", "debloat", "f", "/bin/oemlogkit");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPBugReportLite");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPBugReport_Complete");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","HydrogenDebloating") == "1" then
+	ui_print("[i] Debloat HydrogenOS vendor apps...");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/alipay", "com.eg.android.AlipayGphone");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/amap", "com.autonavi.minimap");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/Calculator", "com.oneplus.calculator");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/card", "com.oneplus.card");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/ctrip", "ctrip.android.view");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/EasterEgg", "com.android.egg");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/GaodeChuxing", "com.autonavi.manu.widget");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/JD", "com.jingdong.app.mall");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/Meituan", "com.sankuai.meituan");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/NeteaseCloudmusic", "com.netease.cloudmusic");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/NeteaseMail", "com.netease.mail");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/oneplusbbs", "com.oneplus.bbs");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackH2Default", "com.oneplus.iconpack.h2default");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackH2Folio", "com.oneplus.iconpack.h2folio");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackH2Light", "com.oneplus.iconpack.h2light");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPSyncCenter", "com.oneplus.cloud");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPWallet", "cn.oneplus.wallet");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/QQreader");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/SinaWeibo", "com.sina.weibo");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/TencentNews", "com.tencent.news");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/YoudaoDict", "com.youdao.dict");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/douyin", "com.ss.android.ugc.aweme");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/iqiyi", "com.qiyi.video");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/tmall", "com.tmall.wireless");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/XimalayaFM", "com.ximalaya.ting.android");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Account", "com.oneplus.account");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/PhotosOnline", "cn.oneplus.photos");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/QQBrowser", "com.android.browser");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/baidushurufa", "com.baidu.input_yijia");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OPMarket", "com.oppo.market");
+	#run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/MCS", "com.coloros.mcs");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPFindMyPhoneUtils", "com.oneplus.findmyphoneutils");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPFindMyPhone", "com.oneplus.findmyphone"); 
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","IndividualDebloatSelection") == "1" then
+	ui_print("[i] Debloat based on user selection");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+
+	if file_getprop("/tmp/opoverlay.profile","GoogleChrome") == "1" then 
+		ui_print("  - Chrome");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Chrome", "com.android.chrome");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","AndroidPay") == "1" then 
+		ui_print("  - AndroidPay");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/AndroidPay");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","ARCore") == "1" then 
+		ui_print("  - ARCore");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/ARCore_stub", "com.google.ar.core");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","GooglePay") == "1" then 
+		ui_print("  - GooglePay");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/GooglePay", "com.google.android.apps.walletnfcrel");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","CalendarGoogle") == "1" then 
+		ui_print("  - CalendarGoogle");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/CalendarGoogle", "com.google.android.calendar");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Drive") == "1" then 
+		ui_print("  - Drive");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Drive", "com.google.android.apps.docs");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Gboard-GoogleKeyboard") == "1" then 
+		ui_print("  - LatinImeGoogle");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/LatinImeGoogle");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Gmail2") == "1" then 
+		if file_getprop("/tmp/opoverlay.profile","GoogleGmailforExchange") == "0" then 
+			ui_print("  - Gmail2");
+			run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Gmail2", "com.google.android.gm");
+		endif; 
+		if file_getprop("/tmp/opoverlay.profile","GoogleGmailforExchange") != "0" then 
+			ui_print("  - Skipped Gmail2 due to Exchange dependency");
+		endif; 
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Hangouts") == "1" then 
+		ui_print("  - Hangouts");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Hangouts");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","LiveWallpapersPicker") == "1" then 
+		ui_print("  - LiveWallpapersPicker");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/LiveWallpapersPicker");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Maps") == "1" then 
+		ui_print("  - Maps");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Maps", "com.google.android.apps.maps");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Music2") == "1" then 
+		ui_print("  - Music2");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Music2", "com.google.android.music");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","OPDialer+Contacts") == "1" then 
+		ui_print("  - OPDialer+Contacts");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/Contacts", "com.android.contacts");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/Dialer", "com.android.dialer");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","OnePlusSwitch") == "1" then 
+		ui_print("  - OnePlusSwitch");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPBackupRestore", "com.oneplus.backuprestore");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPBackupRestore", "com.oneplus.backuprestore");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","NVBackupUI") == "1" then 
+		ui_print("  - NVBackupUI");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/NVBackupUI", "cn.oneplus.nvbackup");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","OPFilemanager") == "1" then 
+		ui_print("  - OPFilemanager");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPFilemanager", "com.oneplus.filemanager");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","OPNotes") == "1" then 
+		ui_print("  - OPNotes");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPNote", "com.oneplus.note");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","OPForum") == "1" then 
+		ui_print("  - OPForum");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPForum", "net.oneplus.forums");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","OPMusic") == "1" then 
+		ui_print("  - OPMusic");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPMusic");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","OPPush") == "1" then 
+		ui_print("  - OPPush");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPPush");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","card") == "1" then 
+		ui_print("  - card");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/card", "com.oneplus.card");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","OPIcons") == "1" then 
+		ui_print("  - OPIcons");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/H2DefaultIconPack");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/H2FolioIconPack");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/H2LightIconPack");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OneplusIconPack");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OneplusSquareIconPack");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OPIconpack");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackCircle", "com.oneplus.iconpack.circle");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackOnePlus", "com.oneplus.iconpack.oneplus");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackSquare", "com.oneplus.iconpack.square");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Photos") == "1" then
+		ui_print("  - Photos"); 
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Photos", "com.google.android.apps.photos");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","SoundRecorder") == "1" then 
+		ui_print("  - SoundRecorder");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/SoundRecorder", "com.oneplus.soundrecorder");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","SwiftKey") == "1" then 
+		ui_print("  - SwiftKey");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/SwiftKey");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","talkback") == "1" then 
+		ui_print("  - talkback");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/talkback");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Velvet-GoogleApp") == "1" then 
+		ui_print("  - Velvet-GoogleApp");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/Velvet", "com.google.android.googlequicksearchbox");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Videos") == "1" then 
+		ui_print("  - Videos");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Videos", "com.google.android.videos");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Weather") == "1" then 
+		ui_print("  - Weather");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/Weather", "net.oneplus.weather");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","YouTube") == "1" then 
+		ui_print("  - YouTube");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/YouTube", "com.google.android.youtube");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","GAppsPicolevel") == "1" then 
+		ui_print("  - Downsize Google framework and apps to pico level");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Chrome", "com.android.chrome");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/DMAgent");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Drive", "com.google.android.apps.docs");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Duo", "com.google.android.apps.tachyon");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/FaceLock");
+		if file_getprop("/tmp/opoverlay.profile","GoogleGmailforExchange") == "0" then 
+			run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Gmail2", "com.google.android.gm");
+		endif; 
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/GooglePay", "com.google.android.apps.walletnfcrel");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/GooglePrintRecommendationService");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Maps", "com.google.android.apps.maps");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Music2", "com.google.android.music");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Photos", "com.google.android.apps.photos");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/talkback");
+		#run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/Velvet", "com.google.android.googlequicksearchbox");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Videos", "com.google.android.videos");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/YouTube", "com.google.android.youtube");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","TotalGAppsremoval") == "1" then 
+		ui_print("  - Remove all Google apps and play framework");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Chrome", "com.android.chrome");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/CalendarGoogle", "com.google.android.calendar");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/DMAgent");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Drive", "com.google.android.apps.docs");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Duo", "com.google.android.apps.tachyon");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/FaceLock");
+		if file_getprop("/tmp/opoverlay.profile","GoogleGmailforExchange") == "0" then 
+			run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Gmail2", "com.google.android.gm");
+		endif; 
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/GooglePay", "com.google.android.apps.walletnfcrel");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/GoogleContactsSyncAdapter");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/GooglePrintRecommendationService");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/GoogleTTS", "com.google.android.tts");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Maps", "com.google.android.apps.maps");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Music2", "com.google.android.music");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Photos", "com.google.android.apps.photos");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/talkback");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Videos", "com.google.android.videos");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/YouTube", "com.google.android.youtube");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/ConfigUpdater");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GoogleBackupTransport");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GoogleFeedback");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GoogleLoginService");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GoogleOneTimeInitializer");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GooglePartnerSetup");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GoogleServicesFramework");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/Phonesky");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/SetupWizard");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/Velvet", "com.google.android.googlequicksearchbox");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GmsCore", "com.google.android.gms");
+		#run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GoogleRestore", "com.google.android.apps.restore");
+		#run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GooglePackageInstaller", "com.google.android.packageinstaller");
+		#run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GoogleExtServices", "com.google.android.ext.services");
+		#run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/GoogleExtShared", "com.google.android.ext.shared");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","BasicDreams") == "1" then 
+		ui_print("  - BasicDreams");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/BasicDreams");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","BookmarkProvider") == "1" then 
+		ui_print("  - BookmarkProvider");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/BookmarkProvider");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","BTtestmode") == "1" then 
+		ui_print("  - BTtestmode");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/BTtestmode");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","bugreport") == "1" then 
+		ui_print("  - bugreport");
+		run_program("/tmp/tools/shjob.sh", "debloat", "f", "/bin/bugreportz");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","DMAgent") == "1" then 
+		ui_print("  - DMAgent");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/DMAgent");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Duo") == "1" then 
+		ui_print("  - Duo");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Duo", "com.google.android.apps.tachyon");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","EasterEgg") == "1" then 
+		ui_print("  - EasterEgg");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/EasterEgg");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","EngSpecialTest") == "1" then 
+		ui_print("  - EngSpecialTest");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/EngSpecialTest");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","fmfactorytest") == "1" then 
+		ui_print("  - fmfactorytest");
+		run_program("/tmp/tools/shjob.sh", "debloat", "f", "/bin/fmfactorytestserver");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","LogKitSdService") == "1" then 
+		ui_print("  - LogKitSdService");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/LogKitSdService");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","NFCTestMode") == "1" then 
+		ui_print("  - NFCTestMode");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/NFCTestMode");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","OemAutoTestServer") == "1" then 
+		ui_print("  - OemAutoTestServer");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OemAutoTestServer");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","OpenWnn") == "1" then 
+		ui_print("  - OpenWnn");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OpenWnn");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","PartnerBookmarksProvider") == "1" then 
+		ui_print("  - PartnerBookmarksProvider");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/PartnerBookmarksProvider");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","SecureSampleAuthService") == "1" then 
+		ui_print("  - SecureSampleAuthService");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/SecureSampleAuthService");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","SensorTestTool") == "1" then 
+		ui_print("  - SensorTestTool");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/SensorTestTool");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","Stk") == "1" then 
+		ui_print("  - Stk");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Stk");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","usb_drivers.iso") == "1" then 
+		ui_print("  - usb_drivers ISO");
+		run_program("/tmp/tools/shjob.sh", "debloat", "f", "/etc/usb_drivers.iso");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","WifiLogger_app") == "1" then 
+		ui_print("  - WifiLogger_app");
+		run_program("/tmp/tools/shjob.sh", "debloat", "f", "/bin/WifiLogger_app");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","WifiRfTestApk") == "1" then 
+		ui_print("  - WifiRfTestApk");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/WifiRfTestApk");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","tts") == "1" then 
+		ui_print("  - tts");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/tts");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","PicoTts") == "1" then 
+		ui_print("  - PicoTts");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/PicoTts");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","GoogleTTS") == "1" then 
+		ui_print("  - GoogleTTS");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/GoogleTTS", "com.google.android.tts");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","VrCore") == "1" then 
+		ui_print("  - VrCore");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/VrCore");
+	endif;
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","AndroidOEmojis") == "1" then 
+	ui_print("[i] Install Android O Emojis");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/fonts/Emojis/android_O/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","iOSEmojis") == "1" then 
+	ui_print("[i] Install iOS12 Emojis");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/fonts/Emojis/iOS/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","EmojiOne") == "1" then 
+	ui_print("[i] Install Emoji One font");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/fonts/Emojis/EmojiOne/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","SamsungEmojis") == "1" then 
+	ui_print("[i] Install Samsung Emoji font");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/fonts/Emojis/Samsung/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","AdAway") == "1" then 
+	ui_print("[i] Install AdAway");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/AdAway/system", "/tmp/system/");
+	#run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/AdAway/etc", "/system/system/etc/");
+	run_program("/tmp/tools/shjob.sh", "perms", "AdAway");
+	#run_program("/tmp/tools/shjob.sh", "lib", "AdAway", "x", "/tmp/system/priv-app");
+	#run_program("/tmp/tools/shjob.sh", "apps2data", "AdAway");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","AlwaysOnDisplay") == "1" then 
+	ui_print("[i] Install Always On Display");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/AOD/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","NavigationGestures") == "1" then 
+	ui_print("[i] Install Navigation Gestures");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/NoBar/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","YouTubeiYTBPmodWhite") == "1" then 
+	ui_print("[i] Install modded YouTube app white themed");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/data");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/YouTube", "com.google.android.youtube"); 
+	run_program("/tmp/tools/shjob.sh", "rm", "d", "/data/app/com.google.android.youtube*");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/iYTBP/white/system", "/tmp/system/");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/iYTBP/system", "/tmp/system/");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/misc/Detach/system", "/tmp/system/etc/opoverlay/");
+	run_program("/tmp/tools/shjob.sh", "lib", "YouTube", "x", "/tmp/system/app");
+	run_program("/tmp/tools/shjob.sh", "detach", "YouTube");
+	run_program("/tmp/tools/shjob.sh", "perms", "YouTube");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","YouTubeiYTBPmodDark") == "1" then 
+	ui_print("[i] Install modded YouTube app dark themed");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/data");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/YouTube", "com.google.android.youtube"); 
+	run_program("/tmp/tools/shjob.sh", "rm", "d", "/data/app/com.google.android.youtube*");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/iYTBP/dark/system", "/tmp/system/");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/iYTBP/system", "/tmp/system/");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/misc/Detach/system", "/tmp/system/etc/opoverlay/");
+	run_program("/tmp/tools/shjob.sh", "lib", "YouTube", "x", "/tmp/system/app");
+	run_program("/tmp/tools/shjob.sh", "detach", "YouTube");
+	run_program("/tmp/tools/shjob.sh", "perms", "YouTube");
+endif;
+ 
+if file_getprop("/tmp/opoverlay.profile","GoogleDialer1") == "1" then 
+	ui_print("[i] Install Google Dialer");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/GoogleDialer/system", "/tmp/system/");
+	run_program("/tmp/tools/shjob.sh", "perms", "Dialer");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","GoogleDialer2") == "1" then 
+	ui_print("[i] Install Google Dialer 2");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	# run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OPInCallUI");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/GoogleDialer/system", "/tmp/system/");
+	run_program("/tmp/tools/shjob.sh", "perms", "Dialer");
+	# run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/Contacts", "com.android.contacts");
+	# run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/Dialer", "com.android.dialer");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","GoogleCamera") == "1" then 
+	ui_print("[i] Install modded Google Camera");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/data");
+	#run_program("/tmp/tools/shjob.sh", "rm", "d", "/data/app/com.google.android.GoogleCamera*");
+	run_program("/tmp/tools/shjob.sh", "apps2data", "GoogleCamera");
+	run_program("/tmp/tools/shjob.sh", "perms", "GoogleCamera");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","GoogleGmailforExchange") == "1" then 
+	ui_print("[i] Install Gmail with Exchange Access");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/Exchange/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","Caffeine") == "1" then 
+	ui_print("[i] Install Screen Timeout tile");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/Caffeine/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","MoreLocale") == "1" then 
+	ui_print("[i] Install MoreLocale2 for HydrogenOS");
+	run_program("/tmp/tools/shjob.sh", "apps2data", "MoreLocale");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","DigitalWellBeing") == "1" then 
+	ui_print("[i] Install Digital WellBeing");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/Wellbeing/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","IceBoxSpeedup") == "1" then 
+	ui_print("[i] Install Ice Box System Plugin");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/IceBoxSpeedup/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","SubstratumThemeEngine") == "1" then 
+	ui_print("[i] Install Substratum Theme Engine");
+	#run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/Substratum/system", "/tmp/system/");
+	run_program("/tmp/tools/shjob.sh", "apps2data", "Substratum");
+	run_program("/tmp/tools/shjob.sh", "perms", "Substratum");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","OzoneModule") == "1" then 
+	ui_print("[i] Install Ozone Theme module");
+	run_program("/tmp/tools/shjob.sh", "apps2data", "Ozone");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","K-KlockModule") == "1" then 
+	ui_print("[i] Install K-Klock Theme module");
+	run_program("/tmp/tools/shjob.sh", "apps2data", "K-Manager");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","Viper4Android") == "1" then 
+	ui_print("[i] Install Viper4Android");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/sound/viper/system", "/tmp/system/");
+	run_program("/tmp/tools/shjob.sh", "cp", "f", "/tmp/sound/viper/viper.sh", "/tmp/system/etc/opoverlay");
+	run_program("/tmp/tools/btweaks.sh", "V4A.prop");
+	run_program("/tmp/tools/shjob.sh", "apps2data", "ViPER4AndroidFX");
+	run_program("/tmp/tools/shjob.sh", "apps2data", "ViPER4Android", "Essentials");
+	run_program("/tmp/tools/shjob.sh", "perms", "Viper");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","DolbyAtmos") == "1" then 
+	ui_print("[i] Install Dolby Atmos");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/sound/dolby/system", "/tmp/system/");
+	run_program("/tmp/tools/shjob.sh", "cp", "f", "/tmp/sound/dolby/dolby.sh", "/tmp/system/etc/opoverlay");
+	run_program("/tmp/tools/shjob.sh", "perms", "Dolby");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","ViperProfileCollection") == "1" then 
+	ui_print("[i] Install Viper Profile Collection");
+	run_program("/tmp/tools/shjob.sh", "apps2data", "ViPER4Android", "Complete");
+	ui_print(" ");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","StereoSpeakerMod") == "1" then 
+	ui_print("[i] Install Stereo Speaker mod");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/sound/stereo/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","OnePlusLauncher") == "0" then 
+	ui_print("[i] Remove OnePlus Launcher");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPLauncher", "net.oneplus.launcher");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPLauncher2", "net.oneplus.launcher");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/H2DefaultIconPack");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/H2FolioIconPack");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/H2LightIconPack");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OneplusIconPack");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OneplusCircleIconPack");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OneplusSquareIconPack");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackCircle", "com.oneplus.iconpack.circle");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackOnePlus", "com.oneplus.iconpack.oneplus");
+	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackSquare", "com.oneplus.iconpack.square"); 
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","NovaLauncher") == "1" then 
+	ui_print("[i] Install Nova Launcher");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/Nova_Launcher/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","ActionLauncher") == "1" then 
+	ui_print("[i] Install Action Launcher");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/Action_Launcher/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","PixelLaucher") == "1" then 
+	ui_print("[i] Install Pixel Launcher");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/Pixel_Launcher/system", "/tmp/system/");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/WallpaperPickerGoogle/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","LawnchairLaucher") == "1" then 
+	ui_print("[i] Install Lawnchair Launcher");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/Lawnchair/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","OxygenStockBootanimation") == "1" then 
+	ui_print("[i] Install OxygenOS stock boot animation");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/BootAnimations/OOS/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","BootAnimationInOverlayFolder") == "1" then 
+	ui_print("[i] Install boot animation from overlay folder");
+	run_program("/tmp/tools/shjob.sh", "bootani");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","GooglePixel1Bootanimation") == "1" then 
+	ui_print("[i] Install Google Pixel 1 boot animation");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/BootAnimations/GooglePixel1/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","GooglePixel2Bootanimation") == "1" then 
+	ui_print("[i] Install Google Pixel 2 boot animation");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/BootAnimations/GooglePixel2/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","WatchDogsBootanimation") == "1" then 
+	ui_print("[i] Install WatchDogs boot animation");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/tmp/tools/shjob.sh", "cp", "d", "/tmp/apps/BootAnimations/WatchDogs/system", "/tmp/system/");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","Xposedbyrovo89sysless") == "1" then 
+	if file_getprop("/tmp/opoverlay.profile","XposedUninstall") != "1" then 
+		ui_print("[i] Install Systemless Xposed framework");
+		run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+		run_program("/sbin/busybox", "unzip", "-o", "/tmp/apps/Xposed/Magisk/Xposed.zip", "META-INF/com/google/android/*", "-d", "/tmp/apps/Xposed/Magisk");
+		run_program("/sbin/busybox", "sh", "/tmp/apps/Xposed/Magisk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/apps/Xposed/Magisk/Xposed.zip");
+		run_program("/tmp/tools/shjob.sh", "apps2data", "Xposed");
+	endif;
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","XposedUninstall") == "1" then 
+	ui_print("[i] Remove Systemless Xposed Magisk module and app");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/sbin/busybox", "unzip", "-o", "/tmp/apps/Xposed/Magisk/opoverlay_xposed_uninstaller.zip", "META-INF/com/google/android/*", "-d", "/tmp/apps/Xposed/Magisk");
+	run_program("/sbin/busybox", "sh", "/tmp/apps/Xposed/Magisk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/apps/Xposed/Magisk/opoverlay_xposed_uninstaller.zip");
+	run_program("/tmp/tools/shjob.sh", "apps2data", "Xposed", "u");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","CustomSplashScreenLogo") == "1" then 
+	ui_print("[i] Flashing splash screen");
+	run_program("/tmp/tools/shjob.sh", "flash", "logo", "OPOverlay1");
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","WindowsAnimationScales") == "1" then 
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+
+	if file_getprop("/tmp/opoverlay.profile","Fastest-NoAnimations") == "1" then 
+		ui_print("[i] Set Windows Aninimation Scale Values to 0");
+		run_program("/tmp/tools/shjob.sh", "scales", "0");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","VeryFastAnimations") == "1" then 
+		ui_print("[i] Set Windows Aninimation Scale Values to 0.25");
+		run_program("/tmp/tools/shjob.sh", "scales", "0.25");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","FastAnimations") == "1" then 
+		ui_print("[i] Set Windows Aninimation Scale Values to 0.50");
+		run_program("/tmp/tools/shjob.sh", "scales", "0.50");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","AndroidStandard") == "1" then 
+		ui_print("[i] Set Windows Aninimation Scale Values to 1");
+		run_program("/tmp/tools/shjob.sh", "scales", "1");
+	endif;
+endif;
+
+if file_getprop("/tmp/opoverlay.profile","ModdedAppsDetaching") == "1" then
+	ui_print("[i] Detach modded apps");
+	run_program("/tmp/tools/shjob.sh", "detach", "enable");
+else
+	ui_print("[i] Retach modded apps");
+	run_program("/tmp/tools/shjob.sh", "detach", "disable"); 
+endif;
+
+#if file_getprop("/tmp/opoverlay.profile","ForceDecryption") == "1" then 
+#run_program("/tmp/tools/shjob.sh", "forcedecryption");
+#endif;
+
+ui_print("[i] Build Magisk module");
+if file_getprop("/tmp/opoverlay.profile","YouTubeiYTBPmodWhite") == "1" || file_getprop("/tmp/opoverlay.profile","YouTubeiYTBPmodDark") == "1" then 
+	ui_print("  - YouTube");
+	run_program("/tmp/tools/shjob.sh", "debloat", "k", "YouTube"); 
+endif;
+if file_getprop("/tmp/opoverlay.profile","GoogleGmailforExchange") == "1" then 
+	ui_print("  - Gmail");
+	run_program("/tmp/tools/shjob.sh", "debloat", "k", "Gmail"); 
+endif;
+ui_print("  - Finalizing...");
+run_program("/tmp/tools/shjob.sh", "debloat", "final");
+run_program("/tmp/tools/shjob.sh", "build.prop", "rom", "OnePlus_Overlay_MK1");
+run_program("/tmp/tools/shjob.sh", "magisk", "module", "ini");
+ui_print(" ");
+ 
+if file_getprop("/tmp/opoverlay.profile","BusyBoxbyosm0sis") == "1" then 
+	ui_print("[i] Install BusyBox");
+	run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+	run_program("/sbin/busybox", "unzip", "-o", "/tmp/bbox/bbox.zip", "META-INF/com/google/android/*", "-d", "/tmp/bbox");
+	run_program("/sbin/busybox", "sh", "/tmp/bbox/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/bbox/bbox.zip");
+endif; 
+
+ui_print("[i] Fixing permissions and cleanup");
+run_program("/tmp/tools/shjob.sh", "mount", "m", "/system");
+run_program("/tmp/tools/shjob.sh", "mount", "m", "/vendor");
+run_program("/tmp/tools/shjob.sh", "mount", "m", "/data");
+run_program("/tmp/tools/shjob.sh", "mount", "m", "/cache");
+run_program("/tmp/tools/shjob.sh", "ini");
+ 
+ui_print("  - Set permissions");
+run_program("/tmp/tools/shjob.sh", "magisk", "module", "maint");
+run_program("/tmp/tools/shjob.sh", "perm");
+if file_getprop("/tmp/opoverlay.profile","FixSDcardpermissions") == "1" then 
+ui_print("  - Fixing SD card permissions. This can take some time...");
+	run_program("/tmp/tools/shjob.sh", "sd");
+endif;  
+ui_print("  - Wiping cache and fstrim partitions");
+run_program("/tmp/tools/shjob.sh", "WipeCache");
+run_program("/tmp/tools/busybox", "fstrim", "-v", "/system");
+run_program("/tmp/tools/busybox", "fstrim", "-v", "/vendor"); 
+run_program("/tmp/tools/busybox", "fstrim", "-v", "/data");
+run_program("/tmp/tools/busybox", "fstrim", "-v", "/cache");
+run_program("/tmp/tools/shjob.sh", "mount", "u", "/system");
+run_program("/tmp/tools/shjob.sh", "mount", "u", "/vendor");
+run_program("/tmp/tools/shjob.sh", "mount", "u", "/data");
+run_program("/tmp/tools/shjob.sh", "mount", "u", "/cache");
+
+ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" ");
+ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" ");
+
+ui_print("--->  Congrats! Installation is now complete :D <---");
+
+ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" ");
+ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" "); ui_print(" ");
+
+ui_print("Copying logs to SD card...");
+run_program("/tmp/tools/shjob.sh", "cp", "f", "/tmp/recovery.log", "/sdcard/opoverlay/logs/");
+run_program("/tmp/tools/shjob.sh", "cp", "f", "/tmp/shjob.log", "/sdcard/opoverlay/logs/");
+
+if file_getprop("/tmp/opoverlay.profile","RebootafterFlashing") == "1" then 
+	ui_print("Your device will reboot in 3 seconds...");
+	sleep(3);
+	run_program("/sbin/reboot", "fota_bl");
+endif;
+
+ui_print("Reboot now");

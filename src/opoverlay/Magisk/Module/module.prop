@@ -1,0 +1,7 @@
+id=mkoverlay
+name=RomFriendlyName
+version=RomVersion
+versionCode=4
+author=iMacks
+description=Overlay ROM for OnePlus devices. The device will boot into the underlying ROM if this module is deleted or disabled.
+template=1500

@@ -1,0 +1,8 @@
+on boot
+
+write /sys/module/sync/parameters/fsync_enabled 0
+write /sys/android_touch/sweep2wake  0
+write /sys/android_touch/doubletap2wake  1
+write /sys/sweep2sleep/sweep2sleep 2
+write /sys/module/msm_performance/parameters/touchboost 0
+write /sys/module/msm_performance/parameters/touchboost 0
