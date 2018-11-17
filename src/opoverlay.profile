@@ -218,7 +218,7 @@ MoreLocale = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< Digital WellBeing >
 #    Get a daily view of your digital habits, such as how frequently you use different apps, notification count, and how often you check your phone.
-DigitalWellBeing = 1
+DigitalWellBeing = 0
 
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< Ice Box Speedup System Plugin >
@@ -318,6 +318,22 @@ HydrogenDebloating = 1
 	#    This will remove OnePlus calculator on Hydrogen OS.
 	HydrogenCalculator = 1
 
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS AutoNavi Map >
+	#    This will remove the AutoNavi map app and services on Hydrogen OS.
+	HydrogenMaps = 1
+
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS VFChong >
+	#    This will remove the VFChong virtual payment top-up app on Hydrogen OS.
+	HydrogenVFC = 1
+
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS File Manager >
+	#    This will remove the OnePlus file manager on Hydrogen OS.
+	HydrogenFileManager = 1
+
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS Oppo Pay >
+	#    This will remove the Oppo pay near me service on Hydrogen OS.
+	HydrogenOppoPayNearMe = 1
+
 
 #--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - GOOGLEFRAMEWORKLEVEL >--< GApps Pico level >
 #    This will remove the GApps framework down to the GApps Pico level, which is the absolute minimum to run the framework
@@ -407,6 +423,22 @@ IndividualDebloatSelection = 1
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< OP Icons >
 		#    OnePlus stock icons.
 		OPIcons = 1
+
+		#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< Tencent Soter >
+		#    This will remove the Tencent biometric authentication service.
+		TencentSoter = 1
+
+		#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< IFAA Service >
+		#    This will remove the AliPay biometric payment authentication service.
+		IfaaService = 1
+
+		#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS Backup >
+		#    This will remove the OnePlus backup app and service.
+		OnePlusBackup = 1
+
+		#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS Bug Report Lite >
+		#    This will remove the OnePlus bug report lite service.
+		OnePlusBugReportLite = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< Photos >
 		#    OnePlus photos

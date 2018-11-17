@@ -494,14 +494,12 @@ if file_getprop("/tmp/opoverlay.profile","HydrogenDebloating") == "1" then
 	if file_getprop("/tmp/opoverlay.profile","HydrogenVendorApps") == "1" then
 		ui_print("  - HydrogeOS vendor apps");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/alipay", "com.eg.android.AlipayGphone");
-		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/amap", "com.autonavi.minimap");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/ctrip", "ctrip.android.view");
-		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/GaodeChuxing", "com.autonavi.manu.widget");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/JD", "com.jingdong.app.mall");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/Meituan", "com.sankuai.meituan");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/NeteaseCloudmusic", "com.netease.cloudmusic");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/NeteaseMail", "com.netease.mail");
-		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/QQreader");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/QQreader", "com.qq.reader");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/SinaWeibo", "com.sina.weibo");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/TencentNews", "com.tencent.news");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/YoudaoDict", "com.youdao.dict");
@@ -511,6 +509,23 @@ if file_getprop("/tmp/opoverlay.profile","HydrogenDebloating") == "1" then
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/XimalayaFM", "com.ximalaya.ting.android");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/QQBrowser", "com.android.browser");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/baidushurufa", "com.baidu.input_yijia");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenMaps") == "1" then
+		ui_print("  - HydrogeOS AutoNavi Maps");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/amap", "com.autonavi.minimap");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/AutoNaviFLP", "cim.amap.android.ams");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/GaodeChuxing", "com.autonavi.manu.widget");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenVFC") == "1" then
+		ui_print("  - HydrogeOS VFC topup");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/VFC", "com.vfuchongcontrol");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenFileManager") == "1" then
+		ui_print("  - HydrogeOS File Manager");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPFilemanager", "com.oneplus.filemanager");
 	endif;
 
 	if file_getprop("/tmp/opoverlay.profile","HydrogenOPAccount") == "1" then
@@ -570,8 +585,13 @@ if file_getprop("/tmp/opoverlay.profile","HydrogenDebloating") == "1" then
 		ui_print("  - HydrogenOS Calculator");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/Calculator", "com.oneplus.calculator");
 	endif;
-	
-	#run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/MCS", "com.coloros.mcs");
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenOppoPayNearMe") == "1" then
+		ui_print("  - HydrogenOS Oppo Pay NearMe");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/nearme", "com.nearme.atlas");
+	endif;
+
+ 	#run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/MCS", "com.coloros.mcs");
 endif;
 
 
@@ -704,6 +724,27 @@ if file_getprop("/tmp/opoverlay.profile","IndividualDebloatSelection") == "1" th
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackSquare", "com.oneplus.iconpack.square");
 	endif;
 
+	if file_getprop("/tmp/opoverlay.profile","TencentSoter") == "1" then
+		ui_print("  - Tencent Soter Service for OOS/HOS");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/SoterService", "com.tencent.soter.soterserver");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","IfaaService") == "1" then
+		ui_print("  - IFAA for HOS/OOS");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/IFAAService", "com.oneplus.ifaaservice");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","OnePlusBackup") == "1" then
+		ui_print("  - Backup for HOS/OOS");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPBackup", "com.oneplus.opbackup");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/BackupRestoreRemoteService ", "com.oneplus.backuprestore.remoteservice");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","OnePlusBugReportLite") == "1" then
+		ui_print("  - Bug Report Lite for HOS/OOS");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPBugReportLite", "com.oneplus.opbugreportlite");
+	endif;
+
 	if file_getprop("/tmp/opoverlay.profile","Photos") == "1" then
 		ui_print("  - Photos"); 
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Photos", "com.google.android.apps.photos");
@@ -797,7 +838,12 @@ if file_getprop("/tmp/opoverlay.profile","IndividualDebloatSelection") == "1" th
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/SetupWizard");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/Velvet", "com.google.android.googlequicksearchbox");
 		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GmsCore", "com.google.android.gms");
-		#run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GoogleRestore", "com.google.android.apps.restore");
+		# experiental
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GoogleRestore", "com.google.android.apps.restore");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/AndroidPlatformServices", "com.google.android.gms.policy_sidecar_aps");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/Turbo", "com.google.android.apps.turbo");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/HotwordEnrollmentXGoogleWCD9340", "com.android.hotwordenrollment.xgoogle");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/HotwordEnrollmentOKGoogleWCD9340", "com.android.hotwordenrollment.okgoogle");
 		#run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GooglePackageInstaller", "com.google.android.packageinstaller");
 		#run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/GoogleExtServices", "com.google.android.ext.services");
 		#run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/GoogleExtShared", "com.google.android.ext.shared");
