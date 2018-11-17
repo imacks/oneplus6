@@ -31,11 +31,8 @@ prop.version=12
 #
 #############################################################################
 
-
-
-
 #--< OVERLAYROM.MENU.MAIN - ROMTWEAKS >--< Windows Animation Scales >
-#    If speed is more important to you than window animations you can choose for a lower value for faster windows animations
+#    If speed is more important, choose a lower value for faster windows animations
 WindowsAnimationScales = 1
 
 	#--< OVERLAYROM.MENU.ANIMATION.SCALES - WINDOWSANIMATIONSPEEDS >--< Fastest - No Animations >
@@ -55,22 +52,20 @@ WindowsAnimationScales = 1
 	AndroidStandard = 0
 
 
-
-	
 #--< OVERLAYROM.MENU.MAIN - ROMTWEAKS >--< Disable Google Play Wakelocks >
-#    This will block some annoying Google Play Store and Services Wakelocks to improved battery life thanks to @MeggaMortY
+#    This will block some annoying Google Play Store and Services Wakelocks to improved battery life
 DisableGooglePlayWakelocks = 1
 
 
 #--< OVERLAYROM.MENU.MAIN - ROMTWEAKS >--< Skip Android Setup Wizard >
-#    This will skip the Android Setup Wizard on the first boot after a clean install. Then you can deside yourself what to setup
+#    This will skip the Android Setup Wizard on first boot after a clean install.
 SkipAndroidSetupWizard = 0
 
 
 #--< OVERLAYROM.MENU.MAIN - ROMTWEAKS >--< Modded Apps Detaching >
 #    This will detach the modded YouTube vanced. 
 #    Default setting (0) is simply disable updates for the app but YouTube will always be listed in the Playstore for available updates
-#    If you want to completely hide Youtube set it to 1 but this will disable the Playstore DailyHygiene Service. No self- or app auto-updates anymore.
+#    If you want to completely hide Youtube set it to 1 but this will disable the Playstore DailyHygiene Service. No self or app auto-updates anymore.
 ModdedAppsDetaching = 0
 
 
@@ -80,19 +75,16 @@ BusyBoxbyosm0sis = 0
 
 
 #--< OVERLAYROM.MENU.MAIN - SDCARDFIX >--< Fix SDcard permissions >
-#    Fix ownership & permissions of files and folders on the sdcard to what they would be if Android OS had put them there itself
+#    Fix ownership and permissions of files and folders on the SD card to what they would be if Android OS had put them there itself.
 FixSDcardpermissions = 0
 
 
-
-
-
 #--< OVERLAYROM.MENU.OPTIONS.MENU - LAUNCHERSELECTION >--< OnePlus Launcher >
-#    BEWARE! If you uncheck this Launcher make sure you you have an alternative Launcher below or you will end up in a Black Screen!
+#    WARNING! If you uncheck this launcher, make sure you you have an alternative launcher below. Otherwise, you will boot to a blank screen!
 OnePlusLauncher = 1
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - LAUNCHERSELECTION >--< Nova Launcher >
-#    It is one of the most Smoothest and highly customizable launcher.
+#    One of the smoothest and customizable launcher.
 NovaLauncher = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - LAUNCHERSELECTION >--< Action Launcher >
@@ -108,55 +100,48 @@ PixelLaucher = 0
 LawnchairLaucher = 0
 
 
-
-
-
 #--< OVERLAYROM.MENU.OPTIONS.MENU - SOUNDMODS >--< ViPER4AndroidFX >
-#    ViPER4AndroidFX thanks to Ahrion, Zackptg5, ViPER520, ZhuHang
+#    This is the original ViPER4AndroidFX
 Viper4Android = 1
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - SOUNDMODS >--< DolbyAtmos >
-#    Legacy Version of Dolby Atmos thanks to guitardedhero, Ahrion and Zackptg5
+#    Legacy Version of Dolby Atmos
 DolbyAtmos = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - SOUNDMODS >--< Viper Profile Collection >
-#    Profile collection for Viper4Arise thanks to @A.R.I.S.E. Team
+#    Profile collection for Viper4Arise
 ViperProfileCollection = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - SOUNDMODS >--< Stereo Speaker Mod >
-#    Adds the earpiece as an additional speaker. Earpiece audio might not be as clear as main speaker
+#    Adds the earpiece as an additional speaker. Earpiece audio might not be as clear as main speaker.
 StereoSpeakerMod = 0
-
 
 
 ##### !!!!! -> Xposed do NOT work on PIE - for OREO only <- !!!!!
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - XPOSEDFRAMEWORK >--< Xposed - Systemless by topjohnwu >
-#    Xposed BETA by @rovo89 as Systemless Module by @topjohnwu - BEWARE!! One Android Restart required & Xposed trips SafetyNet.
+#    Xposed BETA as Systemless Module. WARNING! One Android restart required and Xposed cannot be hidden from SafetyNet.
 Xposedbyrovo89sysless = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - XPOSEDFRAMEWORK >--< Uninstall Xposed Systemless >
-#    This will uninstall the Xposed Systemless Module by @topjohnwu and the Xposed Installer App.
+#    This will uninstall the Xposed Systemless Module and the Xposed Installer App.
 XposedUninstall = 0
 
 
-
-
-
 #--< OVERLAYROM.MENU.OPTIONS.MENU - EMOJIS >--< Oneplus Stock Emojis >
-#    Keep all System Apps and Services
+#    OnePlus stock emojis.
 OneplusStockEmojis = 1
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - EMOJIS >--< Android O Emojis >
-#    thanks to XDA Recognized Contributor linuxct
+#    Stock Android O emojis.
 AndroidOEmojis = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - EMOJIS >--< iOS Emojis >
-#    iOS 12.1 Emojis thanks to @RickyBush
+#    iOS 12.1 emojis
 iOSEmojis = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - EMOJIS >--< Emoji One >
-#    another Emoji variation 
+#    Another Emoji variation 
 EmojiOne = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - EMOJIS >--< Samsung Emojis >
@@ -164,15 +149,12 @@ EmojiOne = 0
 SamsungEmojis = 0
 
 
-
-
-
 #--< OVERLAYROM.MENU.OPTIONS.MENU - SUBSTRATUM >--< Substratum Theme Engine >
 #    Substratum is a theme engine. You can download different theme modules which helps you to theme apps, taskbar items etc.
 SubstratumThemeEngine = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - SUBSTRATUM >--< Ozone Module >
-#    Provides you with different actionbar + accent combinations, QS backgrounds etc.
+#    Provides you with different actionbar and accent combinations, QS backgrounds etc.
 OzoneModule = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - SUBSTRATUM >--< K-Klock Module >
@@ -180,201 +162,198 @@ OzoneModule = 0
 K-KlockModule = 0
 
 
-
-
-
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< AdAway >
-#    AdAway doesn't directly block ads but it limits unwanted ads by blocking servers that distribute those ads to websites
+#    AdAway doesn't directly block ads but it limits unwanted ads by blocking servers that distribute those ads to websites.
 AdAway = 1
 
+
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< Always On Display >
-#    This adds an Always On Option Settings>Display>Ambient display. BEWARE! This will add some battery drain when enabled
+#    This adds an Always On Option in Settings. WARNING! This will impact battery life.
 AlwaysOnDisplay = 0
 
+
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< Navigation Gestures >
-#    Get iPhone X style gesture control thanks to @MishaalRahman and @Zacharee1
+#    Get iPhone X style gesture control
 NavigationGestures = 0
 
+
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< YouTube Vanced mod Black >
-#    This is a modded version of the original YouTube app that enables background / screen-off playback & removes ads
+#    This is a modded version of the original YouTube app that enables background / screen-off playback and removes ads.
 YouTubeiYTBPmodWhite = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< YouTube Vanced mod Dark >
-#    This is a dark themed modded version of the original YouTube app that enables background / screen-off playback & removes ads
+#    This is a dark themed modded version of the original YouTube app that enables background / screen-off playback and removes ads.
 YouTubeiYTBPmodDark = 0
 
+
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< Google Dialer - OOS Dialer remains >
-#    Google Dialer experience but several features are not working when combined with OOS Dialer. But native call recording works
+#    Google Dialer experience but several features are not working when combined with OOS Dialer. But native call recording works.
 GoogleDialer1 = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< Google Dialer - OOS Dialer removed >
-#    improves your calling experience and gain control over calls with features like spam protection, caller ID and call blocking
+#    Improves your calling experience and gain control over calls with features like spam protection, caller ID and call blocking.
 GoogleDialer2 = 0
 
+
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< Google Camera >
-#    Modded version with HDR+ and Slowmotion working
+#    Modded version with HDR+ and slow motion
 GoogleCamera = 0
 
+
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< Google Gmail for Exchange >
-#    This will extend Gmail so you can connect to an Exchange Account
+#    This will extend Gmail so you can connect to an Exchange account
 GoogleGmailforExchange = 0
 
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< Screen Timeout Tile >
-#    QuickTiles is a Screen timeout tile which lets you toggle between 15, 30 seconds, 1 , 2 , 5 , 10, 30 minutes screen on time
+#    QuickTiles is a Screen timeout tile which lets you toggle between 15, 30 seconds, 1 , 2 , 5 , 10, 30 minutes screen on time.
 Caffeine = 1
 
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< MoreLocal >
-#    Morelocal can help you to enable your local language in HydrogenOS.
-#    Don't work for Android itself, but all user apps switch to the selected language.
+#    Enable more local languages in HydrogenOS.
+#    Doesn't work for Android itself, but all user apps switch to the selected language.
 MoreLocale = 0
 
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< Digital WellBeing >
-#    Get a daily view of your digital habits
-#    How frequently you use different apps, How many notifications you receive, or how often you check your phone
+#    Get a daily view of your digital habits, such as how frequently you use different apps, notification count, and how often you check your phone.
 DigitalWellBeing = 1
+
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - MISCELLANEOUSOPTIONS >--< Ice Box Speedup System Plugin >
 #    Speed up Ice Box's freezing and defrosting.
 IceBoxSpeedup = 0
 
 
-
-
-
 #--< OVERLAYROM.MENU.OPTIONS.MENU - BOOTANIMATIONS >--< Oxygen Stock Bootanimation >
-#    
+#    The stock OxygenOS boot animation.
 OxygenStockBootanimation = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - BOOTANIMATIONS >--< Bootanimation in ROM folder >
-#    Install a bootanimation.zip which you prior copied to rom folder on your internal sdcard.
+#    Install a bootanimation.zip which you must have already copied to the rom folder on your internal sdcard.
 BootAnimationInOverlayFolder = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - BOOTANIMATIONS >--< Google Pixel 1 Bootanimation >
-#    thanks to XDA Senior Member niwia
+#    Google Pixel phone boot animation.
 GooglePixel1Bootanimation = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - BOOTANIMATIONS >--< Google Pixel 2 Bootanimation >
-#    
+#    Google Pixel 2 phone boot animation.
 GooglePixel2Bootanimation = 0
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - BOOTANIMATIONS >--< WatchDogs Bootanimation >
-#    thanks to @Robdyx
+#    The awesome WatchDogs animation by Robdyx
 WatchDogsBootanimation = 1
-
-
-
-
-
 
 
 # ------ Debloating Section ------------
 #        0 = no debloating / don't touch
 #        1 = debloat 
 
-
 #--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< Extreme Debloating >
-#    This will process the complete debloat list without any further menu or confirmation
+#    This will debloat all removable apps without further confirmation.
 ExtremeDebloating = 0
 
 
 #--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< OnePlus Analytics Disabler Light >
 #    This will disable the OPDeviceManager which was rumored to send personal device information to OnePlus
 OnePlusAnalyticsDisablerLight = 1
- 
+
 #--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< OnePlus Analytics Disabler Full >
-#    Might mess up usefull stuff. Disables more stuff which is rumored to send analytics or potentially open a backdoor.
+#    Might mess up useful stuff. Disables more stuff which is rumored to send analytics or potentially open a backdoor.
 #    Attention! This option will break secret codes menus like *#800# or *#801# etc. 
 OnePlusAnalyticsDisablerFull = 0
- 
+
+
 #--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS Bloatware >
-#    This will remove third party bloatware on Hydrogen OS.
+#    This will remove bloatware on Hydrogen OS. You need to ENABLE each sub item you want to remove.
 HydrogenDebloating = 1
 
-#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Accounts >
-#    This will remove OnePlus accounts on Hydrogen OS.
-HydrogenOPAccount = 1
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS Vendor Apps >
+	#    This will remove vendor apps such as QQBrowser bundled with Hydrogen OS.
+	HydrogenVendorApps = 1
 
-#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Sync Center >
-#    This will remove OnePlus sync center on Hydrogen OS.
-HydrogenOPSyncCenter = 1
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Accounts >
+	#    This will remove OnePlus accounts on Hydrogen OS.
+	HydrogenOPAccount = 1
 
-#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Wallet >
-#    This will remove OnePlus wallet on Hydrogen OS.
-HydrogenOPWallet = 1
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Sync Center >
+	#    This will remove OnePlus sync center on Hydrogen OS.
+	HydrogenOPSyncCenter = 1
 
-#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Forum >
-#    This will remove OnePlus forum on Hydrogen OS.
-HydrogenOnePlusBBS = 1
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Wallet >
+	#    This will remove OnePlus wallet on Hydrogen OS.
+	HydrogenOPWallet = 1
 
-#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Photos >
-#    This will remove OnePlus photos app on Hydrogen OS.
-HydrogenPhotos = 1
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Forum >
+	#    This will remove OnePlus forum on Hydrogen OS.
+	HydrogenOnePlusBBS = 1
 
-#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Market >
-#    This will remove OnePlus market app on Hydrogen OS.
-HydrogenMarket = 1
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Photos >
+	#    This will remove OnePlus photos app on Hydrogen OS.
+	HydrogenPhotos = 1
 
-#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus FindMyPhone >
-#    This will remove OnePlus FindMyPhone app on Hydrogen OS.
-HydrogenFindMyPhone = 1
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Market >
+	#    This will remove OnePlus market app on Hydrogen OS.
+	HydrogenMarket = 1
 
-#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Easter Egg >
-#    This will remove OnePlus easter egg on Hydrogen OS.
-HydrogenEasterEgg = 1
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus FindMyPhone >
+	#    This will remove OnePlus FindMyPhone app on Hydrogen OS.
+	HydrogenFindMyPhone = 1
 
-#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Icons >
-#    This will remove OnePlus icons on Hydrogen OS.
-HydrogenIcons = 1
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Easter Egg >
+	#    This will remove OnePlus easter egg on Hydrogen OS.
+	HydrogenEasterEgg = 1
 
-#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Card >
-#    This will remove OnePlus card app on Hydrogen OS.
-HydrogenCard = 1
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Icons >
+	#    This will remove OnePlus icons on Hydrogen OS.
+	HydrogenIcons = 1
 
-#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Calculator >
-#    This will remove OnePlus calculator on Hydrogen OS.
-HydrogenCalculator = 1
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Card >
+	#    This will remove OnePlus card app on Hydrogen OS.
+	HydrogenCard = 1
+
+	#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Calculator >
+	#    This will remove OnePlus calculator on Hydrogen OS.
+	HydrogenCalculator = 1
+
 
 #--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - GOOGLEFRAMEWORKLEVEL >--< GApps Pico level >
-#    This will debloat the GApps Framework down to the GApps Pico level which is the absolut minimum to run the framework
+#    This will remove the GApps framework down to the GApps Pico level, which is the absolute minimum to run the framework
 GAppsPicolevel = 0
 
 #--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - GOOGLEFRAMEWORKLEVEL >--< Total GApps removal >
-#    BEWARE!! This will completely remove the Google Framework. No GApps like Youtube, Chrome etc will work anymore
+#    WARNING! This will completely remove the Google Framework. No GApps such as Youtube, Chrome etc.
 TotalGAppsremoval = 1
 
 
-
-	
 #--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< Individual Debloat Selection >
-#    This will provide you with an addition menu where you can select each app, service etc. you want to debloat.
+#    Enabling this will allow you to remove selective apps and services. You need to ENABLE each sub item you want to remove.
 IndividualDebloatSelection = 1	
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< Google Chrome >
-		#    If you debloat Google Chrome, you might experience FCs and Black screens until you update Webview to latest version!
+		#    If you remove Google Chrome, many apps will FC or blank screen. To fix that, you need to install the latest version of WebView separately.
 		GoogleChrome = 0
 		
-		
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< AndroidPay >
-		#    
+		#    Android Pay
 		AndroidPay = 1
 		
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< GooglePay >
-		#    
+		#    Google Pay
 		GooglePay = 1
 				
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< Google ARCore >
-		#    
+		#    ARCore
 		ARCore = 1		
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< CalendarGoogle >
-		#    
+		#    Google Calendar
 		CalendarGoogle = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< Drive >
-		#    
+		#    Google Drive
 		Drive = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< Gboard - Google Keyboard >
@@ -382,23 +361,23 @@ IndividualDebloatSelection = 1
 		Gboard-GoogleKeyboard = 0
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< Gmail2 >
-		#    
+		#    Gmail app
 		Gmail2 = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< Hangouts >
-		#    
+		#    Google Hangouts chat app
 		Hangouts = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< LiveWallpapersPicker >
-		#    
+		#    Live wallpapers picker
 		LiveWallpapersPicker = 0
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< Maps >
-		#    
+		#    Google maps
 		Maps = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< Music2 >
-		#    
+		#    Google Music
 		Music2 = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< OPDialer+Contacts >
@@ -406,43 +385,43 @@ IndividualDebloatSelection = 1
 		OPDialer+Contacts = 0
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< OnePlus Switch >
-		#    
+		#    OnePlus phone data migration app.
 		OnePlusSwitch = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< OPFilemanager >
-		#    
+		#    OnePlus file manager
 		OPFilemanager = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< OPForum >
-		#    
+		#    OnePlus forum
 		OPForum = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< OPMusic >
-		#    
+		#    OnePlus music app
 		OPMusic = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< OPPush >
-		#    
+		#    OnePlus push service
 		OPPush = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< OP Icons >
-		#    
+		#    OnePlus stock icons.
 		OPIcons = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< Photos >
-		#    
+		#    OnePlus photos
 		Photos = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< SoundRecorder >
-		#    
+		#    OnePlus sound recorder
 		SoundRecorder = 0
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< SwiftKey >
-		#    
+		#    SwiftKey IME
 		SwiftKey = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< talkback >
-		#    
+		#    talkback service.
 		talkback = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< Velvet - Google App >
@@ -450,15 +429,15 @@ IndividualDebloatSelection = 1
 		Velvet-GoogleApp = 0
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< Videos >
-		#    
+		#    Videos app.
 		Videos = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< Weather >
-		#    
+		#    OnePlus weather app.
 		Weather = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - LIGHTDEBLOATING-USERAPPS >--< YouTube >
-		#    
+		#    YouTube app.
 		YouTube = 1
 
 		#--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - EXTREMEDEBLOATING-SYSTEMSERVICES >--< BasicDreams >
@@ -570,19 +549,13 @@ IndividualDebloatSelection = 1
 		VrCore = 1
 
 
-
-
-
-
-
 #--< OVERLAYROM.MENU.MAIN - ROMBUILD.PROPTWEAKS >--< All build.prop Tweaks >
 #    Several build.prop tweaks to improve overall performance, smoothness and battery
 Allbuild.propTweaks = 0
 
 #--< OVERLAYROM.MENU.MAIN - ROMBUILD.PROPTWEAKS >--< Individual Tweaks Selections >
-#    This will provide you with an addition menu where you can select each build.prop tweak individual
+#    Selectively enable build.prop tweaks. You need to ENABLE each item that you want.
 IndividualTweaksSelections = 1
-
 
 	#--< OVERLAYROM.MENU.BUILD.PROP - BUILD.PROPTWEAKSELECTIONS >--< Root support for Tasker >
 	#    
@@ -676,7 +649,7 @@ IndividualTweaksSelections = 1
 	#    
 	DisablepersistantUSB = 1
 
-	#--< OVERLAYROM.MENU.BUILD.PROP - BUILD.PROPTWEAKSELECTIONS >--< MMS APN retry timer set to 2 sec >
+	#--< OVERLAYROM.MENU.BUILD.PROP - BUILD.PROPTWEAKSELECTIONS >--< MMS APN retry timer set to 2 seconds >
 	#    
 	MMSAPNretrytimersetto2sec = 1
 
@@ -687,5 +660,3 @@ IndividualTweaksSelections = 1
 	#--< OVERLAYROM.MENU.BUILD.PROP - BUILD.PROPTWEAKSELECTIONS >--< Kernel Tweaks >
 	#    
 	KernelTweaks = 1
-
-

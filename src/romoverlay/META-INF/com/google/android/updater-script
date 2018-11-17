@@ -489,25 +489,29 @@ if file_getprop("/tmp/opoverlay.profile","OnePlusAnalyticsDisablerFull") == "1" 
 endif;
 
 if file_getprop("/tmp/opoverlay.profile","HydrogenDebloating") == "1" then
-	ui_print("[i] Debloat HydrogenOS vendor apps...");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/alipay", "com.eg.android.AlipayGphone");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/amap", "com.autonavi.minimap");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/ctrip", "ctrip.android.view");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/GaodeChuxing", "com.autonavi.manu.widget");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/JD", "com.jingdong.app.mall");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/Meituan", "com.sankuai.meituan");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/NeteaseCloudmusic", "com.netease.cloudmusic");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/NeteaseMail", "com.netease.mail");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/QQreader");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/SinaWeibo", "com.sina.weibo");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/TencentNews", "com.tencent.news");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/YoudaoDict", "com.youdao.dict");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/douyin", "com.ss.android.ugc.aweme");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/iqiyi", "com.qiyi.video");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/tmall", "com.tmall.wireless");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/XimalayaFM", "com.ximalaya.ting.android");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/QQBrowser", "com.android.browser");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/baidushurufa", "com.baidu.input_yijia");
+	ui_print("[i] Debloat HydrogenOS");
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenVendorApps") == "1" then
+		ui_print("  - HydrogeOS vendor apps");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/alipay", "com.eg.android.AlipayGphone");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/amap", "com.autonavi.minimap");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/ctrip", "ctrip.android.view");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/GaodeChuxing", "com.autonavi.manu.widget");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/JD", "com.jingdong.app.mall");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/Meituan", "com.sankuai.meituan");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/NeteaseCloudmusic", "com.netease.cloudmusic");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/NeteaseMail", "com.netease.mail");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/QQreader");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/SinaWeibo", "com.sina.weibo");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/TencentNews", "com.tencent.news");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/YoudaoDict", "com.youdao.dict");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/douyin", "com.ss.android.ugc.aweme");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/iqiyi", "com.qiyi.video");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/tmall", "com.tmall.wireless");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/XimalayaFM", "com.ximalaya.ting.android");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/QQBrowser", "com.android.browser");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/baidushurufa", "com.baidu.input_yijia");
+	endif;
 
 	if file_getprop("/tmp/opoverlay.profile","HydrogenOPAccount") == "1" then
 		ui_print("  - HydrogeOS OnePlus Account");
