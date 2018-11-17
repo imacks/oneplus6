@@ -289,10 +289,53 @@ OnePlusAnalyticsDisablerLight = 1
 #    Attention! This option will break secret codes menus like *#800# or *#801# etc. 
 OnePlusAnalyticsDisablerFull = 0
  
-#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< Hydrogen OS Bloatware >
-#    This will completely remove all bloatware on Hydrogen OS.
+#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS Bloatware >
+#    This will remove third party bloatware on Hydrogen OS.
 HydrogenDebloating = 1
 
+#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Accounts >
+#    This will remove OnePlus accounts on Hydrogen OS.
+HydrogenOPAccount = 1
+
+#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Sync Center >
+#    This will remove OnePlus sync center on Hydrogen OS.
+HydrogenOPSyncCenter = 1
+
+#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Wallet >
+#    This will remove OnePlus wallet on Hydrogen OS.
+HydrogenOPWallet = 1
+
+#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Forum >
+#    This will remove OnePlus forum on Hydrogen OS.
+HydrogenOnePlusBBS = 1
+
+#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Photos >
+#    This will remove OnePlus photos app on Hydrogen OS.
+HydrogenPhotos = 1
+
+#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Market >
+#    This will remove OnePlus market app on Hydrogen OS.
+HydrogenMarket = 1
+
+#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus FindMyPhone >
+#    This will remove OnePlus FindMyPhone app on Hydrogen OS.
+HydrogenFindMyPhone = 1
+
+#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Easter Egg >
+#    This will remove OnePlus easter egg on Hydrogen OS.
+HydrogenEasterEgg = 1
+
+#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Icons >
+#    This will remove OnePlus icons on Hydrogen OS.
+HydrogenIcons = 1
+
+#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Card >
+#    This will remove OnePlus card app on Hydrogen OS.
+HydrogenCard = 1
+
+#--< OVERLAYROM.MENU.OPTIONS.MENU - DEBLOATING >--< HydrogenOS OnePlus Calculator >
+#    This will remove OnePlus calculator on Hydrogen OS.
+HydrogenCalculator = 1
 
 #--< OVERLAYROM.MENU.DEBLOAT.OPTIONS - GOOGLEFRAMEWORKLEVEL >--< GApps Pico level >
 #    This will debloat the GApps Framework down to the GApps Pico level which is the absolut minimum to run the framework

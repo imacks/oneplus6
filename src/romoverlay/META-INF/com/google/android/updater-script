@@ -492,21 +492,12 @@ if file_getprop("/tmp/opoverlay.profile","HydrogenDebloating") == "1" then
 	ui_print("[i] Debloat HydrogenOS vendor apps...");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/alipay", "com.eg.android.AlipayGphone");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/amap", "com.autonavi.minimap");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/Calculator", "com.oneplus.calculator");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/card", "com.oneplus.card");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/ctrip", "ctrip.android.view");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/EasterEgg", "com.android.egg");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/GaodeChuxing", "com.autonavi.manu.widget");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/JD", "com.jingdong.app.mall");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/Meituan", "com.sankuai.meituan");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/NeteaseCloudmusic", "com.netease.cloudmusic");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/NeteaseMail", "com.netease.mail");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/oneplusbbs", "com.oneplus.bbs");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackH2Default", "com.oneplus.iconpack.h2default");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackH2Folio", "com.oneplus.iconpack.h2folio");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackH2Light", "com.oneplus.iconpack.h2light");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPSyncCenter", "com.oneplus.cloud");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPWallet", "cn.oneplus.wallet");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/QQreader");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/SinaWeibo", "com.sina.weibo");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/TencentNews", "com.tencent.news");
@@ -515,15 +506,70 @@ if file_getprop("/tmp/opoverlay.profile","HydrogenDebloating") == "1" then
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/iqiyi", "com.qiyi.video");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/tmall", "com.tmall.wireless");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/vendor/reserve/XimalayaFM", "com.ximalaya.ting.android");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Account", "com.oneplus.account");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/PhotosOnline", "cn.oneplus.photos");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/QQBrowser", "com.android.browser");
 	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/baidushurufa", "com.baidu.input_yijia");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OPMarket", "com.oppo.market");
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenOPAccount") == "1" then
+		ui_print("  - HydrogeOS OnePlus Account");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/Account", "com.oneplus.account");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenOPSyncCenter") == "1" then
+		ui_print("  - HydrogenOS OnePlus SyncCenter");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPSyncCenter", "com.oneplus.cloud");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenOPWallet") == "1" then
+		ui_print("  - HydrogenOS OnePlus Wallet");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPWallet", "cn.oneplus.wallet");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenOnePlusBBS") == "1" then
+		ui_print("  - HydrogenOS OnePlus Forum");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/oneplusbbs", "com.oneplus.bbs");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenPhotos") == "1" then
+		ui_print("  - HydrogenOS Photos");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/PhotosOnline", "cn.oneplus.photos");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenMarket") == "1" then
+		ui_print("  - HydrogenOS Market");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/priv-app/OPMarket", "com.oppo.market");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenFindMyPhone") == "1" then
+		ui_print("  - HydrogenOS FindMyPhone");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPFindMyPhoneUtils", "com.oneplus.findmyphoneutils");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPFindMyPhone", "com.oneplus.findmyphone"); 
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenEasterEgg") == "1" then
+		ui_print("  - HydrogenOS EasterEgg");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/EasterEgg", "com.android.egg");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenIcons") == "1" then
+		ui_print("  - HydrogenOS Icons");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackH2Default", "com.oneplus.iconpack.h2default");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackH2Folio", "com.oneplus.iconpack.h2folio");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/OPIconpackH2Light", "com.oneplus.iconpack.h2light");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenCard") == "1" then
+		ui_print("  - HydrogenOS Card");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/card", "com.oneplus.card");
+	endif;
+
+	if file_getprop("/tmp/opoverlay.profile","HydrogenCalculator") == "1" then
+		ui_print("  - HydrogenOS Calculator");
+		run_program("/tmp/tools/shjob.sh", "debloat", "d", "/reserve/Calculator", "com.oneplus.calculator");
+	endif;
+	
 	#run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/MCS", "com.coloros.mcs");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPFindMyPhoneUtils", "com.oneplus.findmyphoneutils");
-	run_program("/tmp/tools/shjob.sh", "debloat", "d", "/app/OPFindMyPhone", "com.oneplus.findmyphone"); 
 endif;
+
 
 if file_getprop("/tmp/opoverlay.profile","IndividualDebloatSelection") == "1" then
 	ui_print("[i] Debloat based on user selection");
